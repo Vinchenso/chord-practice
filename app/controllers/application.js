@@ -3,13 +3,27 @@ import WebMidi from 'webmidi'
 
 export default Controller.extend({
  isEnabled: false,
+ inputs: null,
+  outputs: null,
 
   actions: {
     enableMidi() {
-      WebMidi.enable({},true)
+      const self = this
+
+      WebMidi.enable((e) => {
+        self.set('isEnabled', true)
+        self.set('inputs', WebMidi.inputs )
+        self.set('outputs', WebMidi.outputs )
+        if(e){
+          console.log(e)
+        }
+      },true)
+
+    },
     disableMidi(){
       WebMidi.disable()
       this.set('isEnabled', false)
     }
+
   }
 });

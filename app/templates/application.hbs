@@ -4,3 +4,14 @@ Chord Practice
   @onEnable={{action "enableMidi"}}
   @status={{this.isEnabled}}
 />
+
+{{#if isEnabled}}
+  <MidiInput
+    @type="Midi Input"
+    @list={{this.inputs}}/>
+
+  <MidiInput
+    @type="Midi Output"
+    @list={{this.outputs}}/>
+
+{{/if}}
