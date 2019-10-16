@@ -4,6 +4,10 @@ export default Component.extend({
   actions:{
     submitEnable(){
       this.onEnable()
+    },
+    submitDisable(){
+      this.onDisable()
     }
+
   }
 });

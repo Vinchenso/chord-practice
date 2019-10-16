@@ -7,6 +7,9 @@ export default Controller.extend({
   actions: {
     enableMidi() {
       WebMidi.enable({},true)
+    disableMidi(){
+      WebMidi.disable()
+      this.set('isEnabled', false)
     }
   }
 });
