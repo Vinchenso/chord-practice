@@ -11,6 +11,6 @@ export default Component.extend({
     submitRefresh(){
       this.onDisable()
       this.onEnable()
-    }
+    },
   }
 });

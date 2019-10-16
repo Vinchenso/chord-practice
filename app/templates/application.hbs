@@ -8,10 +8,20 @@ Chord Practice
 {{#if isEnabled}}
   <MidiInput
     @type="Midi Input"
+    @onSelect={{action "updateSelectedInput" }}
+    @selected={{ this.selectedInput }}
     @list={{this.inputs}}/>
 
   <MidiInput
     @type="Midi Output"
+    @onSelect={{action "updateSelectedOutput" }}
+    @selected={{ this.selectedOutput }}
     @list={{this.outputs}}/>
 
+  {{#if output}}
+    <button {{action 'playNote'}}>Play Note</button>
+  {{/if}}
+
 {{/if}}
+
+

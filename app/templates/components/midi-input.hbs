@@ -1,9 +1,9 @@
 <h1>{{ @type }}</h1>
+<p> Current {{@type}}: {{ @selected }} </p>
 
-{{#each @list as |input|}}
-<ul>
-  <li>
-    {{ input.name }}
-  </li>
-</ul>
-{{/each}}
+<select {{on "change" @onSelect}}>
+  <option value="" selected disabled hidden>Choose here</option>
+  {{#each @list as |input|}}
+    <option value={{input.name}}>{{input.name}}</option>
+  {{/each}}
+</select>
