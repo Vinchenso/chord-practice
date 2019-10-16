@@ -7,7 +7,10 @@ export default Component.extend({
     },
     submitDisable(){
       this.onDisable()
+    },
+    submitRefresh(){
+      this.onDisable()
+      this.onEnable()
     }
-
   }
 });

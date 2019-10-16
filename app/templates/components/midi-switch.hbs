@@ -1,5 +1,11 @@
-status: {{#if @status }} Activated {{else}}Disabled{{/if}}
+status: {{#if @status }} Activated {{else}} Disabled{{/if}}
 <div class="flex">
-  <button {{action "submitEnable" }}> Enable</button>
+
+  {{#if @status }}
+    <button {{action "submitRefresh" }}> Refresh  </button>
+  {{else}}
+    <button {{action "submitEnable" }}> Enable </button>
+  {{/if}}
+
   <button {{action "submitDisable" }}> Disable</button>
 </div>

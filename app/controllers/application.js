@@ -2,8 +2,8 @@ import Controller from '@ember/controller';
 import WebMidi from 'webmidi'
 
 export default Controller.extend({
- isEnabled: false,
- inputs: null,
+  isEnabled: false,
+  inputs: null,
   outputs: null,
 
   actions: {
@@ -15,7 +15,7 @@ export default Controller.extend({
         self.set('inputs', WebMidi.inputs )
         self.set('outputs', WebMidi.outputs )
         if(e){
-          console.log(e)
+          alert(e)
         }
       },true)
 
