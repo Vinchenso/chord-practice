@@ -25,9 +25,12 @@ Chord Practice
     @list={{this.outputs}}/>
 
   {{#if output}}
-    <button {{action 'playNote'}}>Play Note</button>
+    <button {{action "playNote"}}>Play Note</button>
   {{/if}}
+  <hr>
 
+  <SustainIndicator @status={{this.sustain}}/>
 {{/if}}
+
 
 

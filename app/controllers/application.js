@@ -8,6 +8,7 @@ export default Controller.extend({
   outputs: null,
   selectedOutput: null,
   selectedInput: null,
+  sustain: false,
 
   actions: {
     enableMidi() {
@@ -42,7 +43,10 @@ export default Controller.extend({
       const self = this
       this.input.addListener('noteon', "all", ((e) => { self.retrieveMidiInput(e) } ))
       this.input.addListener('noteoff', "all", ((e) => { self.retrieveMidiInput(e) } ))
-      this.input.addListener('controlchange', "all", ((e) => { self.retrieveMidiInput(e) } ))
+      this.input.addListener('controlchange', "all",
+        ((e) =>
+          { self.retrieveMidiControlChanges(e) }
+        ))
 
       console.log('done')
       console.log(this.input)
@@ -52,6 +56,18 @@ export default Controller.extend({
   retrieveMidiInput(e){
     console.log(e)
   },
+
+  retrieveMidiControlChanges(e){
+
+    let status = false
+
+    if(e.value > 0 ) {
+      status = true
+    }
+
+    this.set('sustain', status);
+  },
+
 
   output: computed('selectedOutput', function(){
     return WebMidi.getOutputByName(this.selectedOutput);
