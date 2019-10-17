@@ -50,6 +50,8 @@
     "node": "8.* || >= 10.*"
   },
   "dependencies": {
+    "@tonaljs/chord-dictionary": "^3.2.3",
+    "@tonaljs/pcset": "^3.2.3",
     "webmidi": "^2.5.1"
   }
 }

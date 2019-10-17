@@ -1,6 +1,9 @@
 import Controller from '@ember/controller';
 import WebMidi from 'webmidi'
 import { computed } from '@ember/object';
+import { chordType } from "@tonaljs/chord-dictionary";
+import { pcset } from "@tonaljs/pcset";
+import { A } from '@ember/array';
 
 export default Controller.extend({
   isEnabled: false,
@@ -10,6 +13,12 @@ export default Controller.extend({
   selectedInput: null,
   sustain: false,
   currentNotes: null,
+
+
+  init(){
+this._super(...arguments);
+    this.set('currentNotes', A([]));
+  },
 
   actions: {
     enableMidi() {
@@ -31,7 +40,7 @@ export default Controller.extend({
     },
     updateSelectedInput(e){
       this.set('selectedInput',e.target.value)
-      this.set("currentNotes", [])
+      this.set("currentNotes", A([]))
     },
     updateSelectedOutput(e){
       this.set('selectedOutput',e.target.value)
@@ -58,11 +67,11 @@ export default Controller.extend({
       return item.number != e.note.number
     })
 
-    this.set("currentNotes", newArr )
+    this.set("currentNotes", A([...newArr]) )
   },
 
   retrieveMidiNoteOn(e){
-    this.set("currentNotes", [ ...this.currentNotes, e.note ])
+    this.set("currentNotes", A([ ...this.currentNotes, e.note ]))
   },
 
   retrieveMidiControlChanges(e){
@@ -83,4 +92,11 @@ export default Controller.extend({
   input: computed('selectedInput', function(){
     return WebMidi.getInputByName(this.selectedInput);
   }),
+  knownChord: computed('currentNotes.[]','currentNotes', function(){
+    let notes  = A([])
+    this.currentNotes.map(note => notes.pushObject(note.name + note.octave) )
+    let name = chordType(pcset(notes).chroma).name
+    console.log(name)
+    return chordType(pcset(notes).chroma).name
+  })
 });
