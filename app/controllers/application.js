@@ -9,6 +9,7 @@ export default Controller.extend({
   selectedOutput: null,
   selectedInput: null,
   sustain: false,
+  currentNotes: null,
 
   actions: {
     enableMidi() {
@@ -30,6 +31,7 @@ export default Controller.extend({
     },
     updateSelectedInput(e){
       this.set('selectedInput',e.target.value)
+      this.set("currentNotes", [])
     },
     updateSelectedOutput(e){
       this.set('selectedOutput',e.target.value)
@@ -41,20 +43,26 @@ export default Controller.extend({
     },
     listen(){
       const self = this
-      this.input.addListener('noteon', "all", ((e) => { self.retrieveMidiInput(e) } ))
-      this.input.addListener('noteoff', "all", ((e) => { self.retrieveMidiInput(e) } ))
+      this.input.addListener('noteon', "all", ((e) => { self.retrieveMidiNoteOn(e) } ))
+      this.input.addListener('noteoff', "all", ((e) => { self.retrieveMidiNoteOff(e) } ))
       this.input.addListener('controlchange', "all",
         ((e) =>
           { self.retrieveMidiControlChanges(e) }
         ))
-
-      console.log('done')
-      console.log(this.input)
     }
   },
 
-  retrieveMidiInput(e){
-    console.log(e)
+  retrieveMidiNoteOff(e){
+
+    let newArr = this.currentNotes.filter((item) => {
+      return item.number != e.note.number
+    })
+
+    this.set("currentNotes", newArr )
+  },
+
+  retrieveMidiNoteOn(e){
+    this.set("currentNotes", [ ...this.currentNotes, e.note ])
   },
 
   retrieveMidiControlChanges(e){

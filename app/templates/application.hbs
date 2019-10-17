@@ -30,6 +30,14 @@ Chord Practice
   <hr>
 
   <SustainIndicator @status={{this.sustain}}/>
+
+  <h1>Played Notes</h1>
+    <ul>
+      {{#each this.currentNotes as |note|}}
+        <li> {{ note.name }}</li>
+    {{/each}}
+    </ul>
+
 {{/if}}
 
 
