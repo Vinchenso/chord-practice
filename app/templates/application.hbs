@@ -12,6 +12,12 @@ Chord Practice
     @selected={{ this.selectedInput }}
     @list={{this.inputs}}/>
 
+  {{#if input}}
+    <button {{action 'listen'}}>Listen</button>
+  {{/if}}
+
+
+
   <MidiInput
     @type="Midi Output"
     @onSelect={{action "updateSelectedOutput" }}

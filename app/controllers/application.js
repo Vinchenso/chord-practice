@@ -37,17 +37,26 @@ export default Controller.extend({
     this.output.playNote("G5", 12)
     .sendPitchBend(-0.5, 12, {time: 400}) // After 400 ms.
     .sendPitchBend(0.5, 12, {time: 800})  // After 800 ms.
-    // .stopNote("G5", 12, {time: 5000});    // After 1.2 s.
+    },
+    listen(){
+      const self = this
+      this.input.addListener('noteon', "all", ((e) => { self.retrieveMidiInput(e) } ))
+      this.input.addListener('noteoff', "all", ((e) => { self.retrieveMidiInput(e) } ))
+      this.input.addListener('controlchange', "all", ((e) => { self.retrieveMidiInput(e) } ))
 
+      console.log('done')
+      console.log(this.input)
     }
+  },
 
+  retrieveMidiInput(e){
+    console.log(e)
   },
 
   output: computed('selectedOutput', function(){
     return WebMidi.getOutputByName(this.selectedOutput);
   }),
   input: computed('selectedInput', function(){
-    return WebMidi.getInputByName(this.selectedOutput);
+    return WebMidi.getInputByName(this.selectedInput);
   }),
-
 });
