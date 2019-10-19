@@ -10,7 +10,7 @@ export default class ChordDetector{
       case 0: return ''
       case 1: return notes[0]
       case 2: return self.identifyInterval(notes[0],notes[1])
-      default: return s11.chord.getPossibleChordNames(...notes)
+      default: return s11.chord.identify(...notes)
 
     }
   }
