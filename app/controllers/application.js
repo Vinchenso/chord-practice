@@ -1,9 +1,9 @@
 import Controller from '@ember/controller';
 import WebMidi from 'webmidi'
 import { computed } from '@ember/object';
-import { chordType } from "@tonaljs/chord-dictionary";
-import { pcset } from "@tonaljs/pcset";
 import { A } from '@ember/array';
+
+import ChordDetector from '../utils/chord-detector'
 
 export default Controller.extend({
   isEnabled: false,
@@ -95,8 +95,7 @@ this._super(...arguments);
   knownChord: computed('currentNotes.[]','currentNotes', function(){
     let notes  = A([])
     this.currentNotes.map(note => notes.pushObject(note.name + note.octave) )
-    let name = chordType(pcset(notes).chroma).name
-    console.log(name)
-    return chordType(pcset(notes).chroma).name
+    let name = ChordDetector.identify(notes)
+    return name
   })
 });

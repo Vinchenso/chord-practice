@@ -1,5 +1,6 @@
 import s11 from 'sharp11'
 import teoria from 'teoria'
+
 export default class ChordDetector{
 
   static identify(notes=[]){
