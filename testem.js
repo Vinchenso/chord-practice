@@ -5,9 +5,14 @@ module.exports = {
     'Chrome'
   ],
   launch_in_dev: [
-    'Chrome'
+    'Firefox'
   ],
   browser_args: {
+        'Firefox': [
+            // `-headless`,//comment this line out for debugging purpose
+            // `-width ${testWindowWidth}`,
+            // `-height ${testWindowHeight}`
+        ],
     Chrome: {
       ci: [
         // --no-sandbox is needed when running Chrome inside a container
