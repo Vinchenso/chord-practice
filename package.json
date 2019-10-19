@@ -52,6 +52,8 @@
   "dependencies": {
     "@tonaljs/chord-dictionary": "^3.2.3",
     "@tonaljs/pcset": "^3.2.3",
+    "sharp11": "^2.0.2",
+    "teoria": "^2.5.0",
     "webmidi": "^2.5.1"
   }
 }
