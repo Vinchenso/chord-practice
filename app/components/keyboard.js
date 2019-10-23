@@ -21,7 +21,7 @@ export default Component.extend({
     const self = this;
     for (i = 0; i < this.numberOfOctaves; i++) {
       self.createOctaveWithKeys(
-        i + 2,
+        i + Number(self.startingOctave),
         0 + self.octaveWidthinPixels * i,
         self.whiteKeyClass,
         self.blackKeyClass
@@ -37,12 +37,7 @@ export default Component.extend({
     return `width: ${this.numberOfOctaves * this.octaveWidthinPixels}px;`;
   }),
 
-  createOctaveWithKeys(
-    octave,
-    startingKeyWidth = 1,
-    whiteKeyClass,
-    blackKeyClass
-  ) {
+  createOctaveWithKeys(octave, startingKeyWidth, whiteKeyClass, blackKeyClass) {
     const self = this;
     this.set('data', [
       ...self.data,
