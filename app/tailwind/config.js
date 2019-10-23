@@ -1,7 +1,11 @@
 /*global module*/
 module.exports = {
   theme: {
-    extend: {}
+    extend: {
+      height: {
+        piano: '200px'
+      }
+    }
   },
   variants: {},
   plugins: []
