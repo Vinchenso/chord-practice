@@ -13,7 +13,7 @@ const purgeCSS = {
     ],
     defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
   }
-}
+};
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
@@ -29,7 +29,7 @@ module.exports = function(defaults) {
         plugins: [
           require('postcss-import'),
           require('tailwindcss')('./app/tailwind/config.js'),
-          ...isProduction ? [purgeCSS] : []
+          ...(isProduction ? [purgeCSS] : [])
         ]
       }
     }

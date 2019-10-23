@@ -1,18 +1,14 @@
 module.exports = {
   test_page: 'tests/index.html?hidepassed',
   disable_watching: true,
-  launch_in_ci: [
-    'Chrome'
-  ],
-  launch_in_dev: [
-    'Firefox'
-  ],
+  launch_in_ci: ['Chrome'],
+  launch_in_dev: ['Firefox'],
   browser_args: {
-        'Firefox': [
-            // `-headless`,//comment this line out for debugging purpose
-            // `-width ${testWindowWidth}`,
-            // `-height ${testWindowHeight}`
-        ],
+    Firefox: [
+      // `-headless`,//comment this line out for debugging purpose
+      // `-width ${testWindowWidth}`,
+      // `-height ${testWindowHeight}`
+    ],
     Chrome: {
       ci: [
         // --no-sandbox is needed when running Chrome inside a container
