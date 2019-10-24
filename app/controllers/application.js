@@ -39,28 +39,29 @@ export default Controller.extend({
     updateSelectedInput(e) {
       this.set('selectedInput', e.target.value);
       this.set('currentNotes', A([]));
+      this.listen();
     },
     updateSelectedOutput(e) {
       this.set('selectedOutput', e.target.value);
     },
     playNote() {
-      this.output
-        .playNote('G5', 12)
-        .sendPitchBend(-0.5, 12, { time: 400 }) // After 400 ms.
-        .sendPitchBend(0.5, 12, { time: 800 }); // After 800 ms.
-    },
-    listen() {
-      const self = this;
-      this.input.addListener('noteon', 'all', e => {
-        self.retrieveMidiNoteOn(e);
-      });
-      this.input.addListener('noteoff', 'all', e => {
-        self.retrieveMidiNoteOff(e);
-      });
-      this.input.addListener('controlchange', 'all', e => {
-        self.retrieveMidiControlChanges(e);
-      });
+      this.output.playNote('G5', 12);
     }
+  },
+
+  listen() {
+    const self = this;
+
+    WebMidi.removeListener();
+    this.input.addListener('noteon', 'all', e => {
+      self.retrieveMidiNoteOn(e);
+    });
+    this.input.addListener('noteoff', 'all', e => {
+      self.retrieveMidiNoteOff(e);
+    });
+    this.input.addListener('controlchange', 'all', e => {
+      self.retrieveMidiControlChanges(e);
+    });
   },
 
   retrieveMidiNoteOff(e) {

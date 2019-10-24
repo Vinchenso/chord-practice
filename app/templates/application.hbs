@@ -1,48 +1,34 @@
-<div class="ember-view">
-  Chord Practice
-  <MidiSwitch
-  @onDisable={{action "disableMidi"}}
-  @onEnable={{action "enableMidi"}}
-  @status={{this.isEnabled}}
-  />
-
-  {{#if isEnabled}}
-    <MidiInput
-    @type="Midi Input"
-    @onSelect={{action "updateSelectedInput" }}
-    @selected={{ this.selectedInput }}
-    @list={{this.inputs}}/>
-
-    {{#if input}}
-      <button {{action "listen"}}>Listen</button>
+<div class="flex flex-col justify-between h-screen">
+  <header class='flex border border-b '>
+    <MidiSwitch
+    @onDisable={{action "disableMidi"}}
+    @onEnable={{action "enableMidi"}}
+    @status={{this.isEnabled}}
+    />
+    {{#if isEnabled}}
+      <MidiInput
+      @type="Midi Input"
+      @onSelect={{action "updateSelectedInput" }}
+      @selected={{ this.selectedInput }}
+      @list={{this.inputs}}/>
     {{/if}}
-
-
-
-    <MidiInput
-    @type="Midi Output"
-    @onSelect={{action "updateSelectedOutput" }}
-    @selected={{ this.selectedOutput }}
-    @list={{this.outputs}}/>
-
-    {{#if output}}
-      <button {{action "playNote"}}>Play Note</button>
-    {{/if}}
-    <hr>
-
-    <SustainIndicator @status={{this.sustain}}/>
-    Known Chords: {{ this.knownChord }}
-    <h1>Played Notes</h1>
-    <ul>
+  </header>
+  <main class='text-center'>
+    <h1 class='text-6xl'>
+      {{ this.knownChord }}
+    </h1>
+    <ul class='m-4 flex justify-center'>
       {{#each this.currentNotes as |note|}}
         <li> {{ note.name }}</li>
       {{/each}}
     </ul>
+  </main>
 
-    <!-- <StaveViewer @notes={{this.currentNotes}}/> -->
-
-  {{/if}}
-
-  <Keyboard @numberOfOctaves=2 @startingOctave=4/>
+  <footer class='border border-t border-grey'>
+    {{#if isEnabled}}
+      <SustainIndicator @status={{this.sustain}}/>
+      <Keyboard @numberOfOctaves=1 @startingOctave=4/>
+    {{/if}}
+  </footer>
 
 </div>

@@ -3,6 +3,7 @@ import { computed } from '@ember/object';
 import { A } from '@ember/array';
 
 export default Component.extend({
+  classNames: ['w-full text-center h-64 flex-shrink-0'],
   data: null,
   lowestNote: 'C2',
   highestNote: 'B5',
