@@ -1,34 +1,17 @@
 <div class="flex flex-col justify-between h-screen">
   <header class='flex border border-b '>
     <MidiSwitch
-    @onDisable={{action "disableMidi"}}
-    @onEnable={{action "enableMidi"}}
-    @status={{this.isEnabled}}
+    @onDisable={{action this.midiController.disableMidi }}
+    @onEnable={{action this.midiController.enableMidi}}
+    @status={{this.midiController.isEnabled}}
     />
-    {{#if isEnabled}}
+    {{#if this.midiController.isEnabled}}
       <MidiInput
       @type="Midi Input"
-      @onSelect={{action "updateSelectedInput" }}
-      @selected={{ this.selectedInput }}
-      @list={{this.inputs}}/>
+      @onSelect={{this.midiController.updateSelectedInput}}
+      @selected={{this.midiController.selectedInput }}
+      @list={{this.midiController.inputs}}/>
     {{/if}}
   </header>
-  <main class='text-center'>
-    <h1 class='text-6xl'>
-      {{ this.knownChord }}
-    </h1>
-    <ul class='m-4 flex justify-center'>
-      {{#each this.currentNotes as |note|}}
-        <li> {{ note.name }}</li>
-      {{/each}}
-    </ul>
-  </main>
-
-  <footer class='border border-t border-grey'>
-    {{#if isEnabled}}
-      <SustainIndicator @status={{this.sustain}}/>
-      <Keyboard @numberOfOctaves=1 @startingOctave=4/>
-    {{/if}}
-  </footer>
-
+  {{ outlet }}
 </div>

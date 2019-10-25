@@ -1,0 +1,19 @@
+hey
+
+<div class='text-center'>
+  <h1 class='text-6xl'>
+    {{ this.midiController.knownChord }}
+  </h1>
+  <ul class='m-4 flex justify-center'>
+    {{#each this.midiController.currentNotes as |note|}}
+      <li> {{ note.name }}</li>
+    {{/each}}
+  </ul>
+</div>
+
+<footer class='border border-t border-grey'>
+  {{#if this.midiController.isEnabled}}
+    <SustainIndicator @status={{this.midiController.sustain}}/>
+    <Keyboard @numberOfOctaves=1 @startingOctave=4/>
+  {{/if}}
+</footer>

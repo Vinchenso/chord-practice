@@ -6,6 +6,10 @@ const Router = EmberRouter.extend({
   rootURL: config.rootURL
 });
 
-Router.map(function() {});
+Router.map(function() {
+  this.route('quiz');
+  this.route('identify');
+  this.route('practice');
+});
 
 export default Router;
