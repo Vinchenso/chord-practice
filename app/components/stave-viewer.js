@@ -13,7 +13,7 @@ export default Component.extend({
     this.set(
       'vf',
       new this.vf.Factory({
-        renderer: { elementId: 'port', width: '150', height: '400' }
+        renderer: { elementId: 'port', width: '200', height: '800' }
       })
     );
   },
@@ -30,18 +30,19 @@ export default Component.extend({
     this.set(
       'vf',
       new this.vf.Factory({
-        renderer: { elementId: 'port', width: '150', height: '600' }
+        renderer: { elementId: 'port', width: '200', height: '600' }
       })
     );
 
-    let system = this.vf.System({});
+    let ctx = this.vf.getContext().scale(1.5, 1.5);
+    let system = this.vf.System({ spaceBetweenStaves: 6 });
     let score = this.vf.EasyScore();
 
     // let keys = ['D4', 'C4', 'E4'];
     // console.log(keys);
     let notesPressed = [];
     if (this.keys.length == 0) {
-      notesPressed.push(score.voice(score.notes('G4/1/r')));
+      notesPressed.push(score.voice(score.notes('G4/1/r[id="defaultNote"]')));
     } else {
       notesPressed = this.keys.map(note =>
         score.voice(score.notes(`${note.name}${note.octave}/1`))
@@ -58,20 +59,28 @@ export default Component.extend({
     system
       .addStave({
         voices: notesPressed,
-        options: { spacing_between_lines_px: 17 }
+        y: -500,
+        x: 500,
+        options: { spacing_between_lines_px: 17, space_above_staff_ln: 6 }
       })
       .addClef('treble');
 
+    self = this;
     system
       .addStave({
-        voices: notesPressed,
-        options: { spacing_between_lines_px: 17 }
+        voices: [score.voice(score.notes('C5/1[id="defaultNote"]'))],
+        options: { spacing_between_lines_px: 17, space_above_staff_ln: 6 }
       })
       .addClef('bass');
 
     system.addConnector('singleLeft');
 
     this.vf.draw();
+
+    const defaultNote = document.querySelectorAll('[id=vf-defaultNote]');
+    defaultNote.forEach(function(node) {
+      node.style.display = 'none';
+    });
   },
   willDestroyElement() {
     this._super(...arguments);
