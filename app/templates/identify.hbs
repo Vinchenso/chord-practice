@@ -1,19 +1,22 @@
-<div class='text-center'>
-  <h1 class='text-6xl'>
-    {{ this.midiController.knownChord }}
-  </h1>
-  <ul class='m-4 flex justify-center'>
-    {{#each this.midiController.currentNotes as |note|}}
+<div class='flex'>
+
+  <div class='flex-1 justify-center'>
+    <StaveViewer @keys={{this.midiController.currentNotes}}/>
+  </div>
+
+  <div class='flex-1 justify-center'>
+    <h1 class='text-6xl'>
+      {{ this.midiController.knownChord }}
+    </h1>
+    <ul class='m-4 justify-center'>
+      {{#each this.midiController.currentNotes as |note|}}
       <li> {{ note.name }}</li>
-    {{/each}}
-  </ul>
+      {{/each}}
+    </ul>
+  </div>
 </div>
 
-<StaveViewer @keys={{this.midiController.currentNotes}}/>
-
 <footer class='border border-t border-grey'>
-  {{#if this.midiController.isEnabled}}
     <SustainIndicator @status={{this.midiController.sustain}}/>
-    <Keyboard @numberOfOctaves=1 @startingOctave=4/>
-  {{/if}}
+    <Keyboard @numberOfOctaves=5 @startingOctave=2/>
 </footer>

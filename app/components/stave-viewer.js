@@ -13,13 +13,12 @@ export default Component.extend({
     this.set(
       'vf',
       new this.vf.Factory({
-        renderer: { elementId: 'port', width: '150', height: '300' }
+        renderer: { elementId: 'port', width: '150', height: '400' }
       })
     );
   },
   didRender() {
     this._super(...arguments);
-    console.log('didRender');
 
     const staff = document.getElementById('port');
     while (staff.firstChild) {
@@ -31,17 +30,16 @@ export default Component.extend({
     this.set(
       'vf',
       new this.vf.Factory({
-        renderer: { elementId: 'port', width: '150', height: '300' }
+        renderer: { elementId: 'port', width: '150', height: '600' }
       })
     );
 
-    let system = this.vf.System();
+    let system = this.vf.System({});
     let score = this.vf.EasyScore();
 
     // let keys = ['D4', 'C4', 'E4'];
     // console.log(keys);
     let notesPressed = [];
-
     if (this.keys.length == 0) {
       notesPressed.push(score.voice(score.notes('G4/1/r')));
     } else {
@@ -50,16 +48,24 @@ export default Component.extend({
       );
     }
 
+    // let bassNotes = notesPressed.filter(note => {
+    //   return note < 60;
+    // });
+    // let trebleNotes = notesPressed.filter(note => {
+    //   return note >= 60;
+    // });
+
     system
       .addStave({
         voices: notesPressed,
-        options: { spacing_between_lines_px: 10 }
+        options: { spacing_between_lines_px: 17 }
       })
       .addClef('treble');
 
     system
       .addStave({
-        voices: [score.voice(score.notes('F4/1/r'))]
+        voices: notesPressed,
+        options: { spacing_between_lines_px: 17 }
       })
       .addClef('bass');
 
