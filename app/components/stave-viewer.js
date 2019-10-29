@@ -10,40 +10,38 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
+    // this.set(
+    // 'renderer',
+    // new this.vf.Renderer(this.element, this.vf.Renderer.Backends.SVG)
+    // );
+    // this.renderer.resize(500, 500);
     this.set(
-      'renderer',
-      new this.vf.Renderer(this.element, this.vf.Renderer.Backends.SVG)
+      'vf',
+      new this.vf.Factory({
+        renderer: { elementId: 'port', width: '150', height: '300' }
+      })
     );
-    this.renderer.resize(500, 500);
-    this.set('vfContext', this.renderer.getContext());
-    this.vfContext.setFont('Arial', 10, '').setBackgroundFillStyle('#eed');
   },
   didRender() {
     this._super(...arguments);
 
-    let stave = new this.vf.Stave(10, 40, 400);
-    stave.addClef('bass').addTimeSignature('4/4');
-    stave.setContext(this.vfContext).draw();
+    let system = this.vf.System();
+    let score = this.vf.EasyScore();
 
-    let dataNotes = [
-      { clef: 'bass', keys: ['c/2'], duration: '8' },
-      { clef: 'bass', keys: ['c/2'], duration: '8' },
-      { clef: 'bass', keys: ['d/2'], duration: 'q' },
-      { clef: 'bass', keys: ['b/2'], duration: 'q' }
-      // {clef: "bass", keys: ["b/2"], duration: "q"},
-    ];
-    const self = this;
-    if (self.notes) {
-      dataNotes.push({ clef: 'bass', keys: ['b/2'], duration: 'q' });
-    }
+    system
+      .addStave({
+        voices: [score.voice(score.notes('(C4 D4 E4 )/1'))]
+      })
+      .addClef('treble');
 
-    let notes = dataNotes.map(_note => new this.vf.StaveNote(_note));
-    let voice = new this.vf.Voice({ num_beats: 4, beat_value: 4 });
-    let formatter = new this.vf.Formatter();
+    system
+      .addStave({
+        voices: [score.voice(score.notes('F4/1/r'))]
+      })
+      .addClef('bass');
 
-    voice.addTickables(notes);
-    formatter.joinVoices([voice]).format([voice], 400);
+    system.addConnector();
 
-    voice.draw(this.vfContext, stave);
+    this.vf.draw();
   }
 });

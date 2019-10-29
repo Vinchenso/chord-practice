@@ -7,7 +7,11 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('quiz');
+  this.route('quiz', function() {
+    this.route('builder');
+    this.route('assessment');
+    this.route('review');
+  });
   this.route('identify');
   this.route('practice');
 });
