@@ -10,11 +10,6 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    // this.set(
-    // 'renderer',
-    // new this.vf.Renderer(this.element, this.vf.Renderer.Backends.SVG)
-    // );
-    // this.renderer.resize(500, 500);
     this.set(
       'vf',
       new this.vf.Factory({
@@ -24,17 +19,40 @@ export default Component.extend({
   },
   didRender() {
     this._super(...arguments);
+    console.log('didRender');
+
+    const staff = document.getElementById('port');
+    while (staff.firstChild) {
+      staff.removeChild(staff.firstChild);
+    }
+
+    this.set('vf', Vex.Flow);
+
+    this.set(
+      'vf',
+      new this.vf.Factory({
+        renderer: { elementId: 'port', width: '150', height: '300' }
+      })
+    );
 
     let system = this.vf.System();
     let score = this.vf.EasyScore();
 
+    // let keys = ['D4', 'C4', 'E4'];
+    // console.log(keys);
+    let notesPressed = [];
+
+    if (this.keys.length == 0) {
+      notesPressed.push(score.voice(score.notes('G4/1/r')));
+    } else {
+      notesPressed = this.keys.map(note =>
+        score.voice(score.notes(`${note.name}${note.octave}/1`))
+      );
+    }
+
     system
       .addStave({
-        voices: [
-          score.voice(score.notes('D4/1')),
-          score.voice(score.notes('C4/1')),
-          score.voice(score.notes('E4/1'))
-        ],
+        voices: notesPressed,
         options: { spacing_between_lines_px: 10 }
       })
       .addClef('treble');
@@ -48,5 +66,9 @@ export default Component.extend({
     system.addConnector('singleLeft');
 
     this.vf.draw();
+  },
+  willDestroyElement() {
+    this._super(...arguments);
+    console.log('destroyer');
   }
 });

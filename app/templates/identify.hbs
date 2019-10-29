@@ -9,8 +9,7 @@
   </ul>
 </div>
 
-<StaveViewer/>
-
+<StaveViewer @keys={{this.midiController.currentNotes}}/>
 
 <footer class='border border-t border-grey'>
   {{#if this.midiController.isEnabled}}
