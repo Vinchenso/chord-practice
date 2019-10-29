@@ -30,7 +30,12 @@ export default Component.extend({
 
     system
       .addStave({
-        voices: [score.voice(score.notes('(C4 D4 E4 )/1'))]
+        voices: [
+          score.voice(score.notes('D4/1')),
+          score.voice(score.notes('C4/1')),
+          score.voice(score.notes('E4/1'))
+        ],
+        options: { spacing_between_lines_px: 10 }
       })
       .addClef('treble');
 
@@ -40,7 +45,7 @@ export default Component.extend({
       })
       .addClef('bass');
 
-    system.addConnector();
+    system.addConnector('singleLeft');
 
     this.vf.draw();
   }
