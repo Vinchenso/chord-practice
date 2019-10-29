@@ -3,7 +3,8 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        piano: '200px'
+        piano: '200px',
+        14: '3.5rem'
       }
     }
   },

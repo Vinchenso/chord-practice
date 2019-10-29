@@ -1,10 +1,12 @@
 <div class="flex flex-col justify-between h-screen">
   <header class='flex border border-b '>
-    <MidiSwitch
-    @onDisable={{action this.midiController.disableMidi }}
-    @onEnable={{action this.midiController.enableMidi}}
-    @status={{this.midiController.isEnabled}}
-    />
+    <div class='h-14'>
+      <MidiSwitch
+      @onDisable={{action this.midiController.disableMidi }}
+      @onEnable={{action this.midiController.enableMidi}}
+      @status={{this.midiController.isEnabled}}
+      />
+    </div>
     {{#if this.midiController.isEnabled}}
       <MidiInput
       @type="Midi Input"
