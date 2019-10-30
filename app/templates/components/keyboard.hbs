@@ -6,12 +6,9 @@
     @note={{ key.note }}
     class={{ key.class }}
     style={{ key.style }}
+    @info="{{ key.note }}{{key.octave}}"
+    @pressed={{key.pressed}}
+    @onPress={{action "onKeyboardPress"}}
     />
   {{/each}}
-
 </div>
-
-
-
-
-{{ @numberOfKeys  }}

@@ -35,6 +35,11 @@ export default class MidiControllerService extends Service {
   }
 
   @action
+  playNote(key) {
+    console.log(key);
+  }
+
+  @action
   disableMidi() {
     WebMidi.disable();
     this.set('isEnabled', false);

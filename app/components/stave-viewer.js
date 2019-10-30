@@ -34,7 +34,7 @@ export default Component.extend({
       })
     );
 
-    let ctx = this.vf.getContext().scale(1.5, 1.5);
+    this.vf.getContext().scale(1.5, 1.5);
     let system = this.vf.System({ spaceBetweenStaves: 6 });
     let score = this.vf.EasyScore();
 

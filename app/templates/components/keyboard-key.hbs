@@ -1,4 +1,8 @@
-<div ...attributes>
+<div
+  {{on "click" (fn this.midiController.playNote @info ) }}
+  {{on "click" (fn @onPress @info )}}
+  class= "{{if @pressed 'bg-blue-500'}}"
+   ...attributes>
   <div class="label"><b>{{@hotkey}}</b>
       <br>
       <br>{{@note}}<span name="OCTAVE_LABEL" value="-1">{{@octave}}</span></div>

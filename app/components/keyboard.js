@@ -1,12 +1,13 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { A } from '@ember/array';
+import { tracked } from '@glimmer/tracking';
 
 export default Component.extend({
   classNames: ['w-full text-center h-64 flex-shrink-0'],
-  data: null,
+  @tracked data: null,
   lowestNote: 'C2',
-  highestNote: 'B5',
+  highestNote: 'B6',
   blackKeyClass: 'black-key key',
   whiteKeyClass: 'white-key key',
   octaveWidthinPixels: 280,
@@ -17,6 +18,16 @@ export default Component.extend({
     this.createKeyboard();
   },
 
+  actions: {
+    onKeyboardPress(key) {
+      let idx = this.data.findIndex(function(element) {
+        return element.note == key.note;
+      });
+      console.log(idx);
+      this.data[0].pressed = true;
+      this.set('data', this.data);
+    }
+  },
   createKeyboard() {
     let i;
     const self = this;
@@ -47,10 +58,13 @@ export default Component.extend({
         note: 'C',
         octave: octave,
         class: whiteKeyClass,
-        style: `width: 40px; height: 200px; left: ${0 + startingKeyWidth}px ;`
+        style: `width: 40px; height: 200px; left: ${0 + startingKeyWidth}px ;`,
+        pressed: false
+        // fullname: { note + octave }
       },
       {
         hotkey: '',
+        pressed: false,
         note: 'C#',
         octave: octave,
         class: blackKeyClass,
@@ -58,6 +72,7 @@ export default Component.extend({
       },
       {
         hotkey: '',
+        pressed: false,
         note: 'D',
         octave: octave,
         class: whiteKeyClass,
@@ -65,6 +80,7 @@ export default Component.extend({
       },
       {
         hotkey: '',
+        pressed: false,
         note: 'D#',
         octave: octave,
         class: blackKeyClass,
@@ -72,12 +88,15 @@ export default Component.extend({
       },
       {
         hotkey: '',
+        pressed: false,
+
         note: 'E',
         octave: octave,
         class: whiteKeyClass,
         style: `width: 40px; height: 200px; left: ${80 + startingKeyWidth}px ;`
       },
       {
+        pressed: false,
         hotkey: '',
         note: 'F',
         octave: octave,
@@ -85,6 +104,7 @@ export default Component.extend({
         style: `width: 40px; height: 200px; left: ${120 + startingKeyWidth}px ;`
       },
       {
+        pressed: false,
         hotkey: '',
         note: 'F#',
         octave: octave,
@@ -92,6 +112,7 @@ export default Component.extend({
         style: `width: 30px; height: 120px; left: ${145 + startingKeyWidth}px`
       },
       {
+        pressed: false,
         hotkey: '',
         note: 'G',
         octave: octave,
@@ -99,6 +120,7 @@ export default Component.extend({
         style: `width: 40px; height: 200px; left: ${160 + startingKeyWidth}px ;`
       },
       {
+        pressed: false,
         hotkey: '',
         note: 'G#',
         octave: octave,
@@ -106,6 +128,7 @@ export default Component.extend({
         style: `width: 30px; height: 120px; left: ${185 + startingKeyWidth}px`
       },
       {
+        pressed: false,
         hotkey: '',
         note: 'A',
         octave: octave,
@@ -113,6 +136,7 @@ export default Component.extend({
         style: `width: 40px; height: 200px; left: ${200 + startingKeyWidth}px`
       },
       {
+        pressed: false,
         hotkey: '',
         note: 'A#',
         octave: octave,
@@ -120,6 +144,7 @@ export default Component.extend({
         style: `width: 30px; height: 120px; left: ${225 + startingKeyWidth}px`
       },
       {
+        pressed: false,
         hotkey: '',
         note: 'B',
         octave: octave,
