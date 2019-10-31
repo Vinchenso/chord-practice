@@ -3,7 +3,7 @@
   {{on "mouseout" (fn this.midiController.stopNote @info ) }}
 
   {{on "mousedown" (fn this.midiController.playNote @info ) }}
-  {{on "mouseover" (fn this.midiController.playNote @info ) }}
+  {{!-- {{on "mouseover" (fn this.midiController.playNote @info ) }} --}}
 
 mouseover
   class= "{{if @pressed 'bg-blue-500'}}"

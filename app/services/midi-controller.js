@@ -37,13 +37,13 @@ export default class MidiControllerService extends Service {
   @action
   playNote(note) {
     if (this.selectedOutput == null) return;
-    this.selectedOutput.playNote(note);
+    this.output.playNote(note);
   }
 
   @action
   stopNote(note) {
     if (this.selectedOutput == null) return;
-    this.selectedOutput.stopNote(note);
+    this.output.stopNote(note);
   }
 
   @action
