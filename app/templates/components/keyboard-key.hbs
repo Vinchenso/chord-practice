@@ -3,9 +3,12 @@
   {{on "mouseout" (fn this.midiController.stopNote @info ) }}
 
   {{on "mousedown" (fn this.midiController.playNote @info ) }}
-  {{!-- {{on "mouseover" (fn this.midiController.playNote @info ) }} --}}
 
-mouseover
+  {{on "touchend" (fn this.midiController.stopNote @info ) }}
+  {{on "touchmove" (fn this.midiController.stopNote @info ) }}
+
+  {{on "touchstart" (fn this.midiController.playNote @info ) }}
+
   class= "{{if @pressed 'bg-blue-500'}}"
    ...attributes>
   <div class="label"><b>{{@hotkey}}</b>
