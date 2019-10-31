@@ -1,6 +1,11 @@
 <div
-  {{on "click" (fn this.midiController.playNote @info ) }}
-  {{on "click" (fn @onPress @info )}}
+  {{on "mouseup" (fn this.midiController.stopNote @info ) }}
+  {{on "mouseout" (fn this.midiController.stopNote @info ) }}
+
+  {{on "mousedown" (fn this.midiController.playNote @info ) }}
+  {{on "mouseover" (fn this.midiController.playNote @info ) }}
+
+mouseover
   class= "{{if @pressed 'bg-blue-500'}}"
    ...attributes>
   <div class="label"><b>{{@hotkey}}</b>

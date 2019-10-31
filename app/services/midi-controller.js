@@ -35,8 +35,15 @@ export default class MidiControllerService extends Service {
   }
 
   @action
-  playNote(key) {
-    console.log(key);
+  playNote(note) {
+    if (this.selectedOutput == null) return;
+    this.selectedOutput.playNote(note);
+  }
+
+  @action
+  stopNote(note) {
+    if (this.selectedOutput == null) return;
+    this.selectedOutput.stopNote(note);
   }
 
   @action
@@ -92,6 +99,7 @@ export default class MidiControllerService extends Service {
     }
     this.sustain = status;
   }
+
   @computed('selectedOutput')
   get output() {
     return WebMidi.getOutputByName(this.selectedOutput);
