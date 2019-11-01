@@ -1,17 +1,16 @@
 <div
-  {{on "mouseup" (fn this.midiController.stopNote @info ) }}
-  {{on "mouseout" (fn this.midiController.stopNote @info ) }}
+  {{on "mouseup" (fn this.midiController.stopNote this.noteInfo ) }}
+  {{on "mouseout" (fn this.midiController.stopNote this.noteInfo ) }}
+  {{on "mousedown" (fn this.midiController.playNote this.noteInfo ) }}
+  {{on "touchend" (fn this.midiController.stopNote this.noteInfo ) }}
+  {{on "touchmove" (fn this.midiController.stopNote this.noteInfo ) }}
+  {{on "touchstart" (fn this.midiController.playNote this.noteInfo ) }}
 
-  {{on "mousedown" (fn this.midiController.playNote @info ) }}
-
-  {{on "touchend" (fn this.midiController.stopNote @info ) }}
-  {{on "touchmove" (fn this.midiController.stopNote @info ) }}
-
-  {{on "touchstart" (fn this.midiController.playNote @info ) }}
-
-  class= "{{if @pressed 'bg-blue-500'}}"
-   ...attributes>
-  <div class="label"><b>{{@hotkey}}</b>
-      <br>
-      <br>{{@note}}<span name="OCTAVE_LABEL" value="-1">{{@octave}}</span></div>
+  class= {{if this.notePressed "bg-blue-500"}}
+  ...attributes>
+  <div class="label">
+    <b>{{@hotkey}}</b>
+    <br>
+    <br>{{@note}}<span>{{@octave}}</span>
   </div>
+</div>

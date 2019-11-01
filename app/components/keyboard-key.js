@@ -1,22 +1,25 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
-import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
+import { computed, action } from '@ember/object';
 
 export default class KeyboardKey extends Component {
-  @tracked pressed;
-
   @service midiController;
 
   @action
   keyup(note) {
-    this.pressed = false;
     this.midiController.stopNote(note);
   }
 
   @action
   keydown(note) {
-    this.pressed = true;
     this.midiController.playNote(note);
+  }
+  @computed
+  get noteInfo() {
+    return `${this.args.note}${this.args.octave}`;
+  }
+  @computed('midiController.noteValues.[]')
+  get notePressed() {
+    return this.midiController.noteValues.includes(this.noteInfo.toString());
   }
 }

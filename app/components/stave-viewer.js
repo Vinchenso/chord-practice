@@ -65,7 +65,6 @@ export default Component.extend({
       })
       .addClef('treble');
 
-    self = this;
     system
       .addStave({
         voices: [score.voice(score.notes('C5/1[id="defaultNote"]'))],
@@ -81,9 +80,5 @@ export default Component.extend({
     defaultNote.forEach(function(node) {
       node.style.display = 'none';
     });
-  },
-  willDestroyElement() {
-    this._super(...arguments);
-    console.log('destroyer');
   }
 });

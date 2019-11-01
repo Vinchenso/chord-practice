@@ -1,11 +1,10 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { A } from '@ember/array';
-import { tracked } from '@glimmer/tracking';
 
 export default Component.extend({
   classNames: ['w-full text-center h-64 flex-shrink-0'],
-  @tracked data: null,
+  data: null,
   lowestNote: 'C2',
   highestNote: 'B6',
   blackKeyClass: 'black-key key',
@@ -18,16 +17,6 @@ export default Component.extend({
     this.createKeyboard();
   },
 
-  actions: {
-    onKeyboardPress(key) {
-      let idx = this.data.findIndex(function(element) {
-        return element.note == key.note;
-      });
-      console.log(idx);
-      this.data[0].pressed = true;
-      this.set('data', this.data);
-    }
-  },
   createKeyboard() {
     let i;
     const self = this;

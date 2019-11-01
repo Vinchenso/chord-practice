@@ -16,6 +16,6 @@ module('Unit | Utility | chord-detector', function() {
     assert.equal(ChordDetector.identify([]), '');
     assert.equal(ChordDetector.identify(['c']), 'c');
     assert.equal(ChordDetector.identify(['c4', 'a4']), 'M6');
-    assert.equal(ChordDetector.identify(['g', 'c', 'e'])[0], 'C/G');
+    assert.equal(ChordDetector.identify(['g4', 'e4', 'c4'])[0], 'C');
   });
 });

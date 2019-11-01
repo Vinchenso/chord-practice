@@ -3,5 +3,5 @@ const { Model } = DS;
 
 export default Model.extend({
   name: DS.attr(),
-  date: DS.attr("date"),
+  date: DS.attr('date')
 });

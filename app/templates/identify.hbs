@@ -1,22 +1,27 @@
-<div class='flex'>
+<div class="flex">
 
-  <div class='flex-1 flex justify-center'>
+  <div class="flex-1 flex justify-center">
     <StaveViewer @keys={{this.midiController.currentNotes}}/>
   </div>
 
-  <div class='flex-1 '>
-    <h1 class='text-6xl'>
+  <div class="flex-1 ">
+    <h1 class="text-6xl">
       {{ this.midiController.knownChord }}
     </h1>
-    <ul class='m-4 justify-center'>
+    <ul class="m-4 justify-center">
       {{#each this.midiController.currentNotes as |note|}}
-      <li> {{ note.name }}</li>
+        <li> {{ note.name }}</li>
       {{/each}}
     </ul>
   </div>
 </div>
 
-<footer class='border border-t border-grey'>
-    <SustainIndicator @status={{this.midiController.sustain}}/>
-    <Keyboard @numberOfOctaves=5 @startingOctave=2/>
+<footer class="border border-t border-grey">
+  <SustainIndicator
+    @status={{this.midiController.sustain}}
+  />
+  <Keyboard
+    @numberOfOctaves={{5}}
+    @startingOctave={{2}}
+  />
 </footer>

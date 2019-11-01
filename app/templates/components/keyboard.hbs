@@ -1,3 +1,4 @@
+{{! template-lint-disable no-inline-styles }}
 <div id="keyboard" class="keyboard-holder" style={{ this.octaveWidth }}>
   {{#each this.data as |key|}}
     <KeyboardKey
@@ -6,9 +7,6 @@
     @note={{ key.note }}
     class={{ key.class }}
     style={{ key.style }}
-    @info="{{ key.note }}{{key.octave}}"
-    @pressed={{key.pressed}}
-    @onPress={{action "onKeyboardPress"}}
     />
   {{/each}}
 </div>

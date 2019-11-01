@@ -111,8 +111,15 @@ export default class MidiControllerService extends Service {
   }
 
   @computed('currentNotes.[]', 'currentNotes')
+  get noteValues() {
+    let notes = [];
+    this.currentNotes.map(note => notes.pushObject(note.name + note.octave));
+    return notes;
+  }
+
+  @computed('currentNotes.[]', 'currentNotes')
   get knownChord() {
-    if (this.currentNotes == null) return;
+    if (this.currentNotes == null) return '';
 
     let notes = [];
     this.currentNotes.map(note => notes.pushObject(note.name + note.octave));

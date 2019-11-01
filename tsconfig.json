@@ -1,5 +1,9 @@
 {
   "compilerOptions":{
     "experimentalDecorators": true
-  }
+  },
+  "include": [
+    "app/**/*",
+    "tests/**/*"
+  ]
 }
