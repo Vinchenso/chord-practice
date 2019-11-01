@@ -4,6 +4,7 @@ import { A } from '@ember/array';
 import ChordDetector from '../utils/chord-detector';
 import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import s11 from 'sharp11';
 
 export default class MidiControllerService extends Service {
   @tracked inputs;
@@ -48,6 +49,7 @@ export default class MidiControllerService extends Service {
 
   @action
   disableMidi() {
+    WebMidi.removeListener();
     WebMidi.disable();
     this.set('isEnabled', false);
   }
@@ -81,14 +83,32 @@ export default class MidiControllerService extends Service {
 
   retrieveMidiNoteOff(e) {
     let newArr = this.currentNotes.filter(item => {
-      return item.number != e.note.number;
+      return item.value() != e.note.number;
     });
 
     this.set('currentNotes', A([...newArr]));
   }
 
   retrieveMidiNoteOn(e) {
-    this.set('currentNotes', A([...this.currentNotes, e.note]));
+    this.set(
+      'currentNotes',
+      A([...this.currentNotes, s11.note.fromValue(e.note.number)])
+    );
+  }
+
+  @action
+  removeNote(e) {
+    let newArr = this.currentNotes.filter(item => {
+      return item.value() != s11.note.create(e).value();
+    });
+
+    this.set('currentNotes', A([...newArr]));
+  }
+
+  @action
+  addNote(e) {
+    if (this.currentNotes.includes(e)) return;
+    this.set('currentNotes', A([...this.currentNotes, s11.note.create(e)]));
   }
 
   retrieveMidiControlChanges(e) {
@@ -112,18 +132,14 @@ export default class MidiControllerService extends Service {
 
   @computed('currentNotes.[]', 'currentNotes')
   get noteValues() {
-    let notes = [];
-    this.currentNotes.map(note => notes.pushObject(note.name + note.octave));
-    return notes;
+    return this.currentNotes.map(note => note.fullName);
   }
 
   @computed('currentNotes.[]', 'currentNotes')
   get knownChord() {
     if (this.currentNotes == null) return '';
 
-    let notes = [];
-    this.currentNotes.map(note => notes.pushObject(note.name + note.octave));
-    let name = ChordDetector.identify(notes);
+    let name = ChordDetector.identify(this.noteValues);
     return name;
   }
 }

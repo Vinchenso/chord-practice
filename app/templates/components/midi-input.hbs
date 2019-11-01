@@ -1,5 +1,5 @@
-<div class="flex m-2 items-center w-full">
-  <h1>{{ @type }}:</h1>
+<div class="flex p-2 items-center w-full">
+  <h1 class="w-24">{{ @type }}:</h1>
   <select class="ml-2 p-2 flex-1 bg-gray-100 rounded text-gray-800"{{on "change" @onSelect}}>
     <option value="" selected disabled hidden>Choose here</option>
     {{#each @list as |input|}}

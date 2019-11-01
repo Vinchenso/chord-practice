@@ -1,10 +1,10 @@
 <div
-  {{on "mouseup" (fn this.midiController.stopNote this.noteInfo ) }}
-  {{on "mouseout" (fn this.midiController.stopNote this.noteInfo ) }}
-  {{on "mousedown" (fn this.midiController.playNote this.noteInfo ) }}
-  {{on "touchend" (fn this.midiController.stopNote this.noteInfo ) }}
-  {{on "touchmove" (fn this.midiController.stopNote this.noteInfo ) }}
-  {{on "touchstart" (fn this.midiController.playNote this.noteInfo ) }}
+  {{on "mouseup" (fn this.keyup this.noteInfo ) }}
+  {{on "mouseout" (fn this.keyup this.noteInfo ) }}
+  {{on "mousedown" (fn this.keydown this.noteInfo ) }}
+  {{on "touchend" (fn this.keyup this.noteInfo ) }}
+  {{on "touchmove" (fn this.keyup this.noteInfo ) }}
+  {{on "touchstart" (fn this.keydown this.noteInfo ) }}
 
   class= {{if this.notePressed "bg-blue-500"}}
   ...attributes>

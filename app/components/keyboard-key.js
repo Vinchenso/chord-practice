@@ -7,11 +7,13 @@ export default class KeyboardKey extends Component {
 
   @action
   keyup(note) {
+    this.midiController.removeNote(note);
     this.midiController.stopNote(note);
   }
 
   @action
   keydown(note) {
+    this.midiController.addNote(note);
     this.midiController.playNote(note);
   }
   @computed

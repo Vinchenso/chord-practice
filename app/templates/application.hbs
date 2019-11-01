@@ -1,13 +1,14 @@
 <div class="flex flex-col justify-between h-screen">
-  <header class="flex border border-b ">
-    <div class="h-14">
+  <header class="flex border border-b flex-col md:flex-row">
+    <div class="h-14 mr-4">
       <MidiSwitch
       @onDisable={{action this.midiController.disableMidi }}
       @onEnable={{action this.midiController.enableMidi}}
       @status={{this.midiController.isEnabled}}
       />
     </div>
-    {{#if this.midiController.isEnabled}}
+    <div class="w-full flex flex-col md:flex-row">
+      {{#if this.midiController.isEnabled}}
       <MidiInput
       @type="Midi Input"
       @onSelect={{this.midiController.updateSelectedInput}}
@@ -20,7 +21,8 @@
       @selected={{this.midiController.selectedOutput }}
       @list={{this.midiController.outputs}}/>
 
-    {{/if}}
+      {{/if}}
+    </div>
   </header>
   {{ outlet }}
 </div>
