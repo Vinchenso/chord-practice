@@ -35,6 +35,10 @@ module.exports = function(defaults) {
     }
   });
 
+  app.import('vendor/netlify.toml', {
+    destDir: '/'
+  });
+
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //
