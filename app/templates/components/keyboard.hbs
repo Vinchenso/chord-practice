@@ -1,5 +1,5 @@
 {{! template-lint-disable no-inline-styles }}
-<div id="keyboard" class="keyboard-holder" style={{ this.octaveWidth }}>
+<div id="keyboard" class="overflow-x-auto keyboard-holder" style={{ this.octaveWidth }}>
   {{#each this.data as |key|}}
     <KeyboardKey
     @hotkey=""

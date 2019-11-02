@@ -9,17 +9,17 @@
     </div>
     <div class="w-full flex flex-col md:flex-row">
       {{#if this.midiController.isEnabled}}
-      <MidiInput
-      @type="Midi Input"
-      @onSelect={{this.midiController.updateSelectedInput}}
-      @selected={{this.midiController.selectedInput }}
-      @list={{this.midiController.inputs}}/>
+        <MidiInput
+        @type="Midi Input"
+        @onSelect={{this.midiController.updateSelectedInput}}
+        @selected={{this.midiController.selectedInput }}
+        @list={{this.midiController.inputs}}/>
 
-      <MidiInput
-      @type="Midi Output"
-      @onSelect={{this.midiController.updateSelectedOutput}}
-      @selected={{this.midiController.selectedOutput }}
-      @list={{this.midiController.outputs}}/>
+        <MidiInput
+        @type="Midi Output"
+        @onSelect={{this.midiController.updateSelectedOutput}}
+        @selected={{this.midiController.selectedOutput }}
+        @list={{this.midiController.outputs}}/>
 
       {{/if}}
     </div>
