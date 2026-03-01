@@ -61,7 +61,7 @@
   "dependencies": {
     "sharp11": "^2.0.2",
     "teoria": "^2.5.0",
-    "vexflow": "^1.2.89",
+    "vexflow": "^1.2.93",
     "webmidi": "^2.5.1"
   }
 }
